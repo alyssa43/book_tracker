@@ -1,0 +1,16 @@
+<h2>Search Results</h2>
+
+<% if @results.empty? %>
+  <p>No books found. Try another search.</p>
+<% else %>
+  <% @results.each do |book| %>
+    <div>
+      <h3><%= book[:title] %></h3>
+      <p>Author(s): <%= book[:authors] %></p>
+      <img src="<%= book[:cover_image] %>" alt="Cover image of <%= book[:title] %>">
+    </div>
+    <hr>
+  <% end %>
+<% end %>
+
+<p><a href="/search">New Search</a></p>

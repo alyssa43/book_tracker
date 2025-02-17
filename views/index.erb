@@ -1,0 +1,17 @@
+<h2>My Books</h2>
+<% @books.each do |book| %>
+  <h3><%= book[:title] %></h3>
+    <ul>
+      <li>Author: <%= book[:author] %></li>
+      <li>Rating: <%= book[:rating] %></li>
+      <li>Start Date: <%= book[:start_date] %></li>
+      <li>Finish Date: <%= book[:finish_date] %></li>
+      <li>Review: <%= book[:review] %></li>
+    </ul>
+  
+  <% if book[:cover_image] %>
+    <img src="<%= book[:cover_image] %>" alt="<%= book[:title] %> cover">
+  <% end %>
+  <hr>
+<% end %>
+
