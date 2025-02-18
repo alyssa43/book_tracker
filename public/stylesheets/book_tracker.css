@@ -1,3 +1,26 @@
 body {
-  color: #f2a9f5;
+  background-color: #f5dcf2;
+  font-family: "Atkinson Hyperlegible Next", serif;
+  font-weight: 200;
+}
+
+.heart-icon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
+.add-tbr-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.add-tbr-button:hover .heart-icon {
+  transform: scale(1.2);
+  filter: brightness(1.2);
 }
