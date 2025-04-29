@@ -1,12 +1,28 @@
 require "sinatra"
-require "sinatra/reloader"
+require "sinatra/content_for"
 require "tilt/erubi"
 require "net/http"
 require "json"
-require "yaml"
 
-def load_books
-  YAML.load_file('books.yml', symbolize_names: true)
+require_relative "database_persistence"
+
+configure do
+  enable :sessions
+  set :session_secret, SecureRandom.hex(32)
+  set :erb, :escape_html => true
+end
+
+configure(:development) do
+  require "sinatra/reloader"
+  also_reload "database_persistence.rb"
+end
+
+before do
+  @storage = DatabasePersistence.new(logger)
+end
+
+after do
+  @storage.disconnect
 end
 
 def search_books(query)
@@ -26,7 +42,7 @@ def search_books(query)
 end
 
 get "/" do
-  @books = load_books
+  @books = @storage.view_all_books
   erb :index, layout: :layout
 end
 
